@@ -1,24 +1,24 @@
-* Why
+# Why
 
 Logging forms the basis of all subsequent observability practices - from logging to metrics and on to tracing, good clear logging provides the base upon which decisions can be made on what is meaningful for your particular service.
 Logging provides living documentation on what your service does, is currently doing, and the issues it is encountering. It should enable operators of the service to discover what the service does, what it is doing currently. 
 My experience running thousands of micro-services has shown that clear and robust logging is one of the primary indicators of the maturity of a service and it's ease of implementation and support.
 
-* How To Log
+# How To Log
 
-** Log something!
+## Log something!
 
 If you are doing work, I expect you to log about the work being done. For what you should log see below.
 If you think logging each action taken is too verbose, log a summary of actions per time period. When I open and tail a log for your service I should be able to tell it is operating. Only logging errors is not correct.
 
-** Structured
+## Structured
 Use JSON. Period.
 If you must use text (but really, do not, please!):
 No multi-line logging. Ever. Really, this is evil. Yes, looking at you, Java stack traces.
 Key/Value pairs can be made in text logs to include the context and other values.
 Hybrid log if you must - include unstructured text, but also include key/value pairs or JSON as part of the line.
 
-** Context
+## Context
 
 - Always include context when you instantiate the logger. Include on every line/log:
 - Date / time. Use ISO standard date formats RFC3339 / ISO8601 in UTC is the only acceptable format. No, 05/15/19 is not a good date format.
@@ -33,13 +33,13 @@ Example bad date format from our logs with no timezone, so this is an ambiguous 
 - Application Context. Include context under which your application is running, pod name, server name, for example. Good logging systems might add this for you, but might not.
 - Code context, include file, function, and line. Be succinct though - no full filesystem paths on every line please! Best practice would see this included on non-happy path code paths - so errors, and failure events. Be mindful of the size of your log line.
 
-** Stdout / Stderr
+## Stdout / Stderr
 
 This is the only acceptable log output stream. Do not log to files, especially your own log files. If required provide a syslog functionality.
 
-* What To Log
+# What To Log
 
-** Logging Dos 
+## Logging Dos 
 
 Log as if your program was writing a journal of its lifetime: it’s starts, it handles life events, each life event has major branching/decision points, things that happen, major events that occur, and failures along the way. Logging should always indicate both healthy
 
@@ -69,7 +69,7 @@ Strive for the zen state of Error Zero. This is when your service in, normal tr
 
 When a service is dependent on external entities or services, logs should include this fact, include completion timing, and include these completion times as metrics.
 
-** Logging Do NOTs
+## Logging Do NOTs
 
 - Log sensitive data, such as passwords and PII
 - Log excessively for regular operation. Remember this service could be hit millions of times, regular operation should create the minimal footprint for the happy path. Happy path execution should create a minimal footprint outside of events, decisions and errors. Enough to know something happened, but not a blow by blow on the happy path please.
@@ -84,14 +84,14 @@ These should never be present in production quality code. Why? These are develop
 - Results
 Return code, HTTP response code, timing
 
-* Where To Log
+# Where To Log
 
 Stdout/Stderr. This is the only place to write logs.
 OK, OK, syslog is fine in a pinch.
 No, no, no, don’t write to files. Why not? Because these now need management, rotation, compaction, knowledge of your location is needed outside your service, so the orchestration system needs to know, it’s just … bad.
 But … but … I can only write to a file! Really, I would consider this a broken service. But. If you must ... then include a sidecar logging service that has knowledge of where you log, cleans up your mess, and sends logs to where they should be. These are your responsibility, clean up your room, don’t ask others to do it for you.
 
-* Metrics
+# Metrics
 Errors
 Warnings
 Decisions
