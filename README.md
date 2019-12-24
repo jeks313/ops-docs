@@ -8,3 +8,8 @@ down for people collected in one spt.
 
 Contributors: CR, DF, CH
 
+Note, using `mark` to import to confluence: https://github.com/kovetskiy/mark.git
+
+```sh
+for i in [1-9]*.md; do echo $i; ../mark/mark -f $i; done
+```
