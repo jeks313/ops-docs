@@ -1,3 +1,7 @@
+<!-- Space: OP -->
+<!-- Parent: Operational Readiness Review -->
+<!-- Title: OPR - Logging -->
+
 # Why
 
 Logging forms the basis of all subsequent observability practices - from logging to metrics and on to tracing, good clear logging provides the base upon which decisions can be made on what is meaningful for your particular service.
