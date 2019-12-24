@@ -14,10 +14,10 @@
 - Measure the current depth of a queue and alert on it
 - Measure the maximum age of elements in the queue and alert on it
 - If more sensitivity is required other alerts can be created
--- Queues that are low but non-zero or slowly rising for an extended period of time can indicate a small number of unprocessable elements
--- Queues rise quickly can be alerted on before they hit the maximum queue depth
+    - Queues that are low but non-zero or slowly rising for an extended period of time can indicate a small number of unprocessable elements
+    - Queues rise quickly can be alerted on before they hit the maximum queue depth
 - What to measure (here’s a few frameworks)
--- RED (Rate/Errors/Duration) https://www.weave.works/blog/the-red-method-key-metrics-for-microservices-architecture/
--- USE (Utilization/Saturation/Errors) http://www.brendangregg.com/usemethod.html
--- SRE Golden Signals https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/ #xref_monitoring_golden-signals
--- The first four things you measure (useful for services) https://www.honeycomb.io/blog/instrumentation-the-first-four-things-you-measure /
+    - RED (Rate/Errors/Duration) https://www.weave.works/blog/the-red-method-key-metrics-for-microservices-architecture/
+    - USE (Utilization/Saturation/Errors) http://www.brendangregg.com/usemethod.html
+    - SRE Golden Signals https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/ #xref_monitoring_golden-signals
+    - The first four things you measure (useful for services) https://www.honeycomb.io/blog/instrumentation-the-first-four-things-you-measure /
