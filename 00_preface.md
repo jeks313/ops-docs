@@ -5,7 +5,7 @@
 
 ## Foreword
 
-This setup of documents outlines successive areas of review of a service, set of services, or feature for operational
+This set of documents outlines successive areas of review of a service, set of services, or feature for operational
 best practice. These documents focus on delivering software-as-a-service in a robust, scalable, maintainable and 
 transparent way.
 
