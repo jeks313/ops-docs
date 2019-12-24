@@ -31,3 +31,13 @@ Some places to start before framing the discussion around the review areas:
 
 The next questions are around how you are going to measure these success criteria, and as engineers, what are indicators
 of both sucess and failure (SLIs)?
+
+## Service Maturity Scale
+
+This set of documents is an attempt to assess the operational maturity of a service. It starts with the basics like documentation
+and logging and works it's way up the levels. If a service passes each section of review it advances along the maturity scale.
+
+It has been our experience that the most robust, easy to troubleshoot, resilient services we have worked with had most of the areas
+that this document covers addressed.
+
+So, this is our attempt to come up with a maturity score out of 10 for service deployments!
