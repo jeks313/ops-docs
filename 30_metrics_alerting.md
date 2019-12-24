@@ -1,5 +1,7 @@
 # Metrics and Alerting
 
+## Metrics
+
 - Watch cardinality
 - Cardinality is a measure of all unique sets of possible labels on a metric. Unbounded cardinality is very bad as most time series data stores (Prometheus, for example) stores each unique set of labels as it's own time series.
 - Some examples of unbounded cardinality:
@@ -21,3 +23,12 @@
     - USE (Utilization/Saturation/Errors) http://www.brendangregg.com/usemethod.html
     - SRE Golden Signals https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/ #xref_monitoring_golden-signals
     - The first four things you measure (useful for services) https://www.honeycomb.io/blog/instrumentation-the-first-four-things-you-measure /
+
+## Alerting
+
+No discussion of alerting can be had without introducing SLOs. Every service should have Service Level Objectives that describe it's desired availability to the 
+customer. Once we describe what key Service Level Indicators (SLIs) exist, we can start to monitor them.
+
+Some good case studies of implementing SLOs:
+
+- https://landing.google.com/sre/workbook/chapters/slo-engineering-case-studies/

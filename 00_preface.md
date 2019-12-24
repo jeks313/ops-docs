@@ -9,11 +9,11 @@ transparent way.
 Before getting started, these processes and areas of review work better and better the further you can inject them into
 the engineering process. Doing so requires a lot of education and support of those engineering teams.
 
-Usually, organisations implement these as a before-prodcution checklist. It is the easiest place to start but will inject
-more friction into the split development / operations divide.
+Usually, organisations initially implement these as a before-prodcution checklist. It is the easiest place to start but will inject
+more friction into the split development / operations divide. 
 
 As such you quickly want to move the expertise from the SRE team into the engineering teams, getting them to use these review
-areas during the development process. 
+areas during the development process, and review them before submitting a service for production deployment. 
 
 This is not an easy thing and takes dedication, passion for reliability engineering and lots of support!
 
