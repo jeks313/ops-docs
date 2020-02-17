@@ -8,3 +8,5 @@
 - Config should be “batteries included” - your application should have as few mandatory config values as possible (outside of secrets) by having okay defaults for everything
 - Default values should, where possible, prefer something that is likely to work in a variety of environments over something that is optimal in a few
 - Not including defaults is a valid strategy where the risk of misconfiguration is high. An application that doesn’t start is preferable to one that starts and then demolishes your database.
+- Configuration should specific to the service and not shared.
+- Secrets, if used, should be specific to the service.
