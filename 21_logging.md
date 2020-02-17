@@ -4,19 +4,19 @@
 
 # Why
 
-Logging forms the basis of all subsequent observability practices - from logging to metrics and on to tracing, good clear logging provides the base upon which decisions can be made on what is meaningful for your particular service.
-Logging provides living documentation on what your service does, is currently doing, and the issues it is encountering. It should enable operators of the service to discover what the service does, what it is doing currently. 
-My experience running thousands of micro-services has shown that clear and robust logging is one of the primary indicators of the maturity of a service and it's ease of implementation and support.
+Logging forms the basis of all subsequent observability practices - from logging you move on metrics and tracing. Good clear logging provides the base upon which decisions can be made on what is meaningful for your particular service.
+
+Logging also provides living documentation on what your service does, is currently doing, and the issues it is encountering. Clear and robust logging is one of the primary indicators of the maturity of a service and it's ease of implementation and support.
 
 Logging as a topic seems super basic. What about cool stuff like metrics and tracing? Why not skip right to those?
 
 Taking the time to ensure your logging is clear, concise, shows structure and program flows means that you have taken the time to introspect on what is important to convey about what your service
-is doing and how it is working.
+is doing and how it is working. It means you have already structured the code and put points at which you have put in the log statements.
 
 Without this clear thought how are the metrics going to be showing what you need them to show? How will you take the next steps into dashboarding and tracing? How will you analyze and further debug the
 results of metrics or tracing showing a problem?
 
-Logging is the basis on which all further observability is built. 
+Logging is the start on which further observability is built. 
 
 I have found that there is a strong correlation between service reliability, resilience and maturity of the logging. Perhaps it's because more mature software has had a requirement for more debugging
 which usually results in an improvement in logging. Whatever the case I have rarely found services with no logging to be bug free - there is always issues easy to find with such services.
@@ -26,14 +26,19 @@ which usually results in an improvement in logging. Whatever the case I have rar
 ## Log something!
 
 If you are doing work, I expect you to log about the work being done. For what you should log see below.
+
 If you think logging each action taken is too verbose, log a summary of actions per time period. When I open and tail a log for your service I should be able to tell it is operating. Only logging errors is not correct.
 
 ## Structured
+
 Use JSON. Period.
-If you must use text (but really, do not, please!):
-No multi-line logging. Ever. Really, this is evil. Yes, looking at you, Java stack traces.
-Key/Value pairs can be made in text logs to include the context and other values.
-Hybrid log if you must - include unstructured text, but also include key/value pairs or JSON as part of the line.
+
+If you must use text (but really, do not, please!): No multi-line logging. Ever. Really, this is evil. Yes, looking at you, Java stack traces.
+
+Some in-between places you can go:
+
+- Key/Value pairs can be made in text logs to include the context and other values.
+- Hybrid log - include unstructured text, but also include key/value pairs or JSON as part of the line.
 
 ## Context
 
@@ -59,7 +64,7 @@ or better yet:
 
 Some things to include on every line/log:
 
-- Date / time. Use ISO standard date formats RFC3339 / ISO8601 in UTC is the only acceptable format. No, 05/15/19 is not a good date format.
+- Date / time. Use ISO standard date formats RFC3339 / ISO8601 in UTC is the only acceptable format. No, `02/03/12` is not a good date format.
 
 Example bad date format from our logs with no timezone, so this is an ambiguous time.
 
@@ -67,9 +72,19 @@ Example bad date format from our logs with no timezone, so this is an ambiguous 
 2019-12-10 06:55:51.770 ERROR SomeExceptionMiddlewareHandler - Some Exception caught during processing
 ```
 
-- Request ID and user context. Include context that ties log lines for a single request together, include context that ties requests for a single session together, include context that ties requests for a single user together. Include all 3 - logging wizardry!
-- Application Context. Include context under which your application is running, pod name, server name, for example. Good logging systems might add this for you, but might not.
-- Code context, include file, function, and line. Be succinct though - no full filesystem paths on every line please! Best practice would see this included on non-happy path code paths - so errors, and failure events. Be mindful of the size of your log line.
+Some different areas of context to include:
+
+- Request ID and user context. 
+
+Include context that ties log lines for a single request together, include context that ties requests for a single session together, include context that ties requests for a single user together. Include all 3 - logging wizardry!
+
+- Application or envrionment context. 
+
+Include context under which your application is running, pod name, server name, for example. Good logging systems might add this for you, but might not.
+
+- Code context. 
+
+Include file, function, and line. Be succinct though - no full filesystem paths on every line please! Best practice would see this included on non-happy path code paths - so errors, and failure events. Be mindful of the size of your log line.
 
 ## Stdout / Stderr
 
