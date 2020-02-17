@@ -8,6 +8,19 @@ Logging forms the basis of all subsequent observability practices - from logging
 Logging provides living documentation on what your service does, is currently doing, and the issues it is encountering. It should enable operators of the service to discover what the service does, what it is doing currently. 
 My experience running thousands of micro-services has shown that clear and robust logging is one of the primary indicators of the maturity of a service and it's ease of implementation and support.
 
+Logging as a topic seems super basic. What about cool stuff like metrics and tracing? Why not skip right to those?
+
+Taking the time to ensure your logging is clear, concise, shows structure and program flows means that you have taken the time to introspect on what is important to convey about what your service
+is doing and how it is working.
+
+Without this clear thought how are the metrics going to be showing what you need them to show? How will you take the next steps into dashboarding and tracing? How will you analyze and further debug the
+results of metrics or tracing showing a problem?
+
+Logging is the basis on which all further observability is built. 
+
+I have found that there is a strong correlation between service reliability, resilience and maturity of the logging. Perhaps it's because more mature software has had a requirement for more debugging
+which usually results in an improvement in logging. Whatever the case I have rarely found services with no logging to be bug free - there is always issues easy to find with such services.
+
 # How To Log
 
 ## Log something!
@@ -24,7 +37,28 @@ Hybrid log if you must - include unstructured text, but also include key/value p
 
 ## Context
 
-- Always include context when you instantiate the logger. Include on every line/log:
+Which would you prefer:
+
+```
+2020-02-16T18:23:19-08:00 ERROR login failed.
+```
+
+or
+
+```
+2020-02-16T18:23:19-08:00 ERROR userId=23 action=login status=failure
+```
+
+or better yet:
+
+```
+{"level":"error","hostname":"localhost:61613","time":"2020-02-16T18:23:19-08:00","userId":23, "action":"login", "status":"failure"}
+```
+
+*Always* include context when you instantiate the logger you use, include this context when you log. 
+
+Some things to include on every line/log:
+
 - Date / time. Use ISO standard date formats RFC3339 / ISO8601 in UTC is the only acceptable format. No, 05/15/19 is not a good date format.
 
 Example bad date format from our logs with no timezone, so this is an ambiguous time.
@@ -80,10 +114,6 @@ When a service is dependent on external entities or services, logs should includ
 - If events are numbered in the 100's of millions, it is acceptable to log a summary roll up of events per time period, but events (and thus activity) must be logged.
 - Log exceptions with no context.
 - Log warnings, or WARN level
-These should never be present in production quality code. Why? These are developer todo lists in log file form. What are warnings? Something bad, that’s not quite an error? Do you want someone to take action on this message? If so it’s an error, if not, it’s informational. If it caused the user to fail, it’s an error. If it did not it’s informational. As a developer do you want to know when that happens, and how often? Create a log event with a metric that you can visualize and get alerted on. Include it in your SLO. So, warnings are work that has not be completed yet, and a warning that the service is not ready.
-- Errors, Warnings, Info, Trace
--- Errors
--- Warnings
 These should never be present in production quality code. Why? These are developer todo lists in log file form. What are warnings? Something bad, that’s not quite an error? Do you want someone to take action on this message? If so it’s an error, if not, it’s informational. If it caused the user to fail, it’s an error. If it did not it’s informational. As a developer do you want to know when that happens, and how often? Create a log event with a metric that you can visualize and get alerted on. Include it in your SLO. So, warnings are work that has not be completed yet, and a warning that the service is not ready.
 - Results
 Return code, HTTP response code, timing
